@@ -6,10 +6,15 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header("Location: dashboard.php");
+    exit();
+}
+
 require_once 'conexion.php';
 
 $user_id = $_SESSION['user_id'];
-$contacto_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$contacto_id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 
 if ($contacto_id > 0) {
     try {
